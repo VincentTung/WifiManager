@@ -1,6 +1,9 @@
 package androidadvance.vincent.com.wifimgrtest;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
@@ -11,6 +14,8 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Toast;
+
+import com.tencent.mmkv.MMKV;
 
 import java.util.List;
 
@@ -24,14 +29,30 @@ public class MainActivity extends AppCompatActivity {
     WifiManager mWifiManager = null;
     private int req_permission = 87;
 
+    private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (WifiManager.SCAN_RESULTS_AVAILABLE_ACTION.equals(intent.getAction())) {
+                listWifi();
+            }
+        }
+    };
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION);
+        registerReceiver(mBroadcastReceiver, filter);
 
         mWifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
 
         WifiInfo wifiInfo = mWifiManager.getConnectionInfo();
+
+        mWifiManager.startScan();
         Log.d(TAG,"------"+wifiInfo.toString());
         wifiInfo.getSSID();
         wifiInfo.getBSSID();
@@ -44,6 +65,10 @@ public class MainActivity extends AppCompatActivity {
                 requestPermissions(new String[]{ACCESS_WIFI_STATE}, req_permission);
             }
         }
+        testMMKV();
+
+        boolean result = MMKV.defaultMMKV().getBoolean("first",false);
+        Log.d(TAG,"-----result："+result);
     }
 
     private void listWifi() {
@@ -55,6 +80,14 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(TAG, "------" + scanResult.toString());
             }
         }
+    }
+
+
+    private void testMMKV()
+    {
+       MMKV mmkv =  MMKV.defaultMMKV();
+
+       mmkv.putBoolean("first",true);
     }
 
     @Override
