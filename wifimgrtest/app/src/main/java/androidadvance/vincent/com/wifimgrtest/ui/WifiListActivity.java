@@ -25,6 +25,7 @@ import java.util.List;
 import androidadvance.vincent.com.wifimgrtest.R;
 import androidadvance.vincent.com.wifimgrtest.adapter.WifiListAdapter;
 
+import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 import static android.Manifest.permission.ACCESS_WIFI_STATE;
 import static android.Manifest.permission.CHANGE_WIFI_STATE;
@@ -63,7 +64,7 @@ public class WifiListActivity extends BaseActivity implements AdapterView.OnItem
         mProgressBar = findViewById(R.id.progress_circular);
         registerBroadcast();
         mWifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
-        mRxPermissions.request(ACCESS_WIFI_STATE, CHANGE_WIFI_STATE, ACCESS_FINE_LOCATION).subscribe(granted -> {
+        mRxPermissions.request(ACCESS_WIFI_STATE, CHANGE_WIFI_STATE, ACCESS_FINE_LOCATION,ACCESS_COARSE_LOCATION).subscribe(granted -> {
             if (granted) {
                 mProgressBar.setVisibility(View.VISIBLE);
                 mWifiManager.startScan();
