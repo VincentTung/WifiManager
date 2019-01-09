@@ -24,7 +24,6 @@ import java.util.List;
 
 import androidadvance.vincent.com.wifimgrtest.R;
 import androidadvance.vincent.com.wifimgrtest.adapter.WifiListAdapter;
-import androidadvance.vincent.com.wifimgrtest.util.WiFiConnecter;
 
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 import static android.Manifest.permission.ACCESS_WIFI_STATE;
@@ -132,57 +131,19 @@ public class WifiListActivity extends BaseActivity implements AdapterView.OnItem
 
     private void connectWifi(Context context, ScanResult wifiInfo) {
 
-
-        WiFiConnecter mWiFiConnecter = new WiFiConnecter(context);
-        mWiFiConnecter.connect(wifiInfo.SSID, "123321123", new WiFiConnecter.ActionListener() {
-
-
-            @Override
-            public void onStarted(String ssid) {
-
-            }
-
-            @Override
-            public void onSuccess(WifiInfo info) {
+        WifiConfiguration wc = new WifiConfiguration();
+        wc = configWifiInfo(context,wifiInfo.SSID,"xxjdwifi013",getType(wifiInfo));
+        int netId = mWifiManager.addNetwork(wc);
+        if (netId != -1) {
+            boolean isConnect = mWifiManager.enableNetwork(netId, false);
+            if (isConnect) {
                 Toast.makeText(context, "连接成功", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onFailure() {
-
+            } else {
                 Toast.makeText(context, "连接失败", Toast.LENGTH_SHORT).show();
             }
-
-            @Override
-            public void onFinished(boolean isSuccessed) {
-                Toast.makeText(context, "连接完毕", Toast.LENGTH_SHORT).show();
-            }
-        });
-//        WifiConfiguration wc = new WifiConfiguration();
-//        wc.SSID = wifiInfo.SSID;
-//        wc.preSharedKey = "123321123";
-//        wc.hiddenSSID = true;
-//        wc.status = WifiConfiguration.Status.ENABLED;
-//        wc.allowedGroupCiphers.set(WifiConfiguration.GroupCipher.TKIP);
-//        wc.allowedGroupCiphers.set(WifiConfiguration.GroupCipher.CCMP);
-//        wc.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.WPA_PSK);
-//        wc.allowedPairwiseCiphers.set(WifiConfiguration.PairwiseCipher.TKIP);
-//        wc.allowedPairwiseCiphers.set(WifiConfiguration.PairwiseCipher.CCMP);
-//        wc.allowedProtocols.set(WifiConfiguration.Protocol.RSN);
-//
-////        wc = configWifiInfo(context,wifiInfo.SSID,"123321123",getType(wifiInfo));
-//        mWifiManager.disconnect();
-//        int netId = mWifiManager.addNetwork(wc);
-//        if (netId != -1) {
-//            boolean isConnect = mWifiManager.enableNetwork(netId, false);
-//            if (isConnect) {
-//                Toast.makeText(context, "连接成功", Toast.LENGTH_SHORT).show();
-//            } else {
-//                Toast.makeText(context, "连接失败", Toast.LENGTH_SHORT).show();
-//            }
-//        } else {
-//            Toast.makeText(context, "连接失败", Toast.LENGTH_SHORT).show();
-//        }
+        } else {
+            Toast.makeText(context, "连接失败", Toast.LENGTH_SHORT).show();
+        }
     }
 
 
