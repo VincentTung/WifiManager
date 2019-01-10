@@ -7,13 +7,25 @@
     tools:context=".activity.MainActivity">
 
     <Button
-        android:id="@+id/btn_wifi_list"
+        android:id="@+id/wifi_list"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Wifi List"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.118" />
 
+    <Button
+        android:id="@+id/ble_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="BLE List"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/wifi_list"
+        app:layout_constraintVertical_bias="0.056" />
 </android.support.constraint.ConstraintLayout>

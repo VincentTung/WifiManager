@@ -14,7 +14,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        findViewById(R.id.btn_wifi_list).setOnClickListener(this);
+        findViewById(R.id.wifi_list).setOnClickListener(this);
+        findViewById(R.id.ble_list).setOnClickListener(this);
     }
 
 
@@ -22,8 +23,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     public void onClick(View v) {
         int viewId = v.getId();
         switch (viewId) {
-            case R.id.btn_wifi_list:
+            case R.id.wifi_list:
                 startActivity(new Intent(this, WifiListActivity.class));
+                break;
+            case R.id.ble_list:
+                startActivity(new Intent(this, BleListActivity.class));
                 break;
             default:
                 break;
