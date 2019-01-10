@@ -1,4 +1,4 @@
-package androidadvance.vincent.com.wifimgrtest.ui;
+package androidadvance.vincent.com.wifimgrtest.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
