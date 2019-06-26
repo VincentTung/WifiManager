@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">WifiManager</string>
     <string name="wif_pwd_hint">请输入wifi密码</string>
+
 </resources>
