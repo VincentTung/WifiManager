@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">wifimanger</string>
+    <string name="open_location_service">请打开定位服务</string>
+    <string name="ungot_location_service">未获取定位权限或者GPS未打开</string>
+    <string name="invalid_wifi">无效WIFI</string>
+    <string name="adhoc_not_supported_yet">AdHoc is not supported by Android platform yet!</string>
+    <string name="no_wifi">暂无WIFI</string>
+    <string name="connecting">连接中...</string>
+    <string name="cancel">取消</string>
+    <string name="confirm">确定</string>
+    <string name="search_on_current_wifi">当前wifi已连接</string>
+    <string name="please_go_system_wifi_setting">请到系统WIFI列表中进行手动WIFI连接</string>
+    <string name="wif_pwd_hint">请输入密码</string>
+    <string name="connect_failed">连接失败</string>
+    <string name="option_failed">操作失败</string>
+    <string name="open_wifi_first">请先打开WIFI</string>
+    <string name="connect_success">连接成功</string>
+    <string name="grant_net_permission">请开启网络权限</string>
+</resources>
