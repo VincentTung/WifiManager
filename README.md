@@ -7,5 +7,4 @@
 
 
 ## 截图预览
-
-<img src="/screen_shot/1.jpg" width="280" alt="信息"/> <img src="/screen_shot/2.jpg" width="280" alt="信息"/>
+ <img src="/screen_shot/2.jpg" width="280" alt="信息"/>
